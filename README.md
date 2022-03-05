@@ -1,6 +1,8 @@
 # XML Editor RW
 ---
- An XML Generation tool for Rimworld 1.3 written in java 8 (jre 1.8)
+Version 0.0.1
+
+An XML Generation tool for Rimworld 1.3 written in java 8 (jre 1.8)
  
 ---
 FEATURES:
@@ -8,6 +10,11 @@ FEATURES:
 -An XML template generator
 
 -Generate templates for: ThingsDefs (ThingDef_Item_Base, ThingDefs_Item_Generic, etc).
+
+---
+TO DO:
+
+-Mostly everything, this is version 0.0.1
 
 ---
 HOW TO USE:
