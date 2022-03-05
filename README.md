@@ -26,4 +26,4 @@ Download the latest release or download the jar from the out folder and run it u
 ---
 NOTES:
 
--Remember to save each template after generation, as the generator *will* clear upon each new generation
+-Remember to save each template after generation, as the text area *will* clear upon each new generation
