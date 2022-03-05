@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="XMLEditorRW:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/XMLEditorRW_jar</output-path>
+    <root id="archive" name="XMLEditorRW.jar">
+      <element id="module-output" name="XMLEditorRW" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/commons-io/commons-io/2.11.0/commons-io-2.11.0.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
