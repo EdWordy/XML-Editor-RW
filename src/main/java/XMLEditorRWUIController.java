@@ -10,6 +10,7 @@ import javafx.scene.control.*;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -30,11 +31,11 @@ public class XMLEditorRWUIController extends Application {
 
     public String currentFileType;
 
-    public String ThingDef  = "\\thingDef_Base.xml";
+    public String ThingDef_Base  = "\\thingDef_Base.xml";
 
     public String ThingDef_Item_Base  = "\\thingDef_Item_Base.xml";
 
-    public String ThingDef_Item  = "\\thingDef_Item_Generic.xml";
+    public String ThingDef_Item_Generic  = "\\thingDef_Item_Generic.xml";
 
     public String RecipeDef;
 
@@ -92,7 +93,7 @@ public class XMLEditorRWUIController extends Application {
 
         // creates the root, sets it equal to the .fxml file and then sets the stage
         Parent root = FXMLLoader.load(getClass().getResource("XMLEditorRWUI.fxml"));
-        primaryStage.setTitle("XML Editor RW v0.0.1");
+        primaryStage.setTitle("XML Editor RW v0.0.2");
         primaryStage.setScene(new Scene(root, 1000, 1000));
         primaryStage.setResizable(true);
         primaryStage.show();
@@ -135,9 +136,9 @@ public class XMLEditorRWUIController extends Application {
 
         // creates a new alert popup box when the about button is clicked
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("XML Editor RW v0.0.1 help");
+        alert.setTitle("XML Editor RW v0.0.2 help");
         alert.setHeaderText(null);
-        alert.setContentText("XML Editor RW v0.0.1 was written in java 8 for Rimworld 1.3");
+        alert.setContentText("XML Editor RW v0.0.2 was written in java 8 for Rimworld 1.3");
         alert.showAndWait();
     }
 
@@ -177,13 +178,13 @@ public class XMLEditorRWUIController extends Application {
         }
     }
 
-    public void generateThingDefBase(ActionEvent actionEvent) throws ParserConfigurationException {
+    public void generateThingDefBase(ActionEvent actionEvent) throws ParserConfigurationException, TransformerException {
 
         // messages
         dialog.setText("Generating ThingDef (base)...");
 
-        // currentFileType
-        currentFileType = ThingDef;
+        // set currentFileType
+        currentFileType = ThingDef_Base;
 
         // instantiate the document builder, the factory and document
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -198,26 +199,38 @@ public class XMLEditorRWUIController extends Application {
         Element thingDef = doc.createElement("ThingDef");
         defs.appendChild(thingDef);
 
+        // TODO finish this section of elements
 
 
 
 
         if (cbTD.getSelectionModel().isSelected(0)) {
 
-            //
+            // messages
             System.out.println("No values selected");
-
-
 
         } else if (cbTD.getSelectionModel().isSelected(1)){
 
-            //
+            // messages
             System.out.println("Default values selected");
 
+            // TODO finish this section of setters
 
 
 
         }
+
+        // create the transformer to output the document
+        Transformer tf = TransformerFactory.newInstance().newTransformer();
+        tf.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
+        tf.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
+        tf.setOutputProperty(OutputKeys.INDENT, "yes");
+        Writer out = new StringWriter();
+        tf.transform(new DOMSource(doc), new StreamResult(out));
+
+        // set to text area
+        textArea.clear();
+        textArea.setText(out.toString());
 
         // messages
         dialog.setText("ThingDef (base) generated");
@@ -228,7 +241,7 @@ public class XMLEditorRWUIController extends Application {
         // messages
         dialog.setText("Generating ThingDef_Item_Base (generic)...");
 
-        // currentFileType
+        // set currentFileType
         currentFileType = ThingDef_Item_Base;
 
         // instantiate the document builder, the factory and document
@@ -310,8 +323,8 @@ public class XMLEditorRWUIController extends Application {
         // messages
         dialog.setText("Generating ThingDef_Item_Generic...");
 
-        // currentFileType
-        currentFileType = ThingDef_Item;
+        // set currentFileType
+        currentFileType = ThingDef_Item_Generic;
 
         // instantiate the document builder, the factory and document
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -344,11 +357,50 @@ public class XMLEditorRWUIController extends Application {
         thingDef.appendChild(description);
         description.setTextContent(" ");
 
-        //
+        // create the graphicData element
+        Element graphicData = doc.createElement("graphicData");
+        thingDef.appendChild(graphicData);
+        graphicData.setTextContent(System.getProperty(System.lineSeparator()));
 
+        // create the graphicClass element
+        Element graphicClass = doc.createElement("graphicClass");
+        graphicData.appendChild(graphicClass);
+        graphicClass.setTextContent(" ");
 
+        // create the texPath element
+        Element texPath = doc.createElement("texPath");
+        graphicData.appendChild(texPath);
+        texPath.setTextContent(" ");
 
+        // create the statBase element
+        Element statBase = doc.createElement("statBases");
+        thingDef.appendChild(statBase);
+        statBase.setTextContent(System.getProperty(System.lineSeparator()));
 
+        // create the Mass element
+        Element Mass = doc.createElement("Mass");
+        statBase.appendChild(Mass);
+        Mass.setTextContent(" ");
+
+        // create the MarketValue element
+        Element MarketValue = doc.createElement("MarketValue");
+        statBase.appendChild(MarketValue);
+        MarketValue.setTextContent(" ");
+
+        // create the stuffProps element
+        Element stuffProps = doc.createElement("stuffProps");
+        thingDef.appendChild(stuffProps);
+        stuffProps.setTextContent(System.getProperty(System.lineSeparator()));
+
+        // create the thingCategories element
+        Element thingCategories = doc.createElement("thingCategories");
+        thingDef.appendChild(thingCategories);
+        thingCategories.setTextContent(System.getProperty(System.lineSeparator()));
+
+        // create the li 1 element
+        Element li1 = doc.createElement("li");
+        thingCategories.appendChild(li1);
+        li1.setTextContent(" ");
 
         if (cbTDIG.getSelectionModel().isSelected(0)) {
 
@@ -363,10 +415,11 @@ public class XMLEditorRWUIController extends Application {
             // set the Def attributes
             thingDef.setAttribute("ParentName", "ResourceBase");
 
-            //
+            // set the graphicClass element
+            graphicClass.setTextContent("Graphic_Single");
 
-
-
+            // set the texPath element
+            texPath.setTextContent("Things/Item");
         }
 
         // create the transformer to output the document
@@ -374,12 +427,13 @@ public class XMLEditorRWUIController extends Application {
         tf.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
         tf.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
         tf.setOutputProperty(OutputKeys.INDENT, "yes");
-        Writer out = new StringWriter();
+        StringWriter out = new StringWriter();
         tf.transform(new DOMSource(doc), new StreamResult(out));
+
 
         // set to text area
         textArea.clear();
-        textArea.setText(out.toString());
+        textArea.setText(String.valueOf(out));
 
         // messages
         dialog.setText("ThingDef_Item_Generic generated");

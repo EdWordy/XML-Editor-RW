@@ -39,7 +39,7 @@
                         </Menu>
                      </items>
                   </Menu>
-              <MenuItem mnemonicParsing="false" onAction="#close" text="Close" />
+              <MenuItem mnemonicParsing="false" onAction="#close" text="Close Program" />
             </items>
           </Menu>
             <Menu mnemonicParsing="false" text="Open">
@@ -60,10 +60,10 @@
         </menus>
       </MenuBar>
       <ToolBar layoutY="40.0" prefHeight="39.0" prefWidth="1000.0" AnchorPane.bottomAnchor="921.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0" />
-      <TextArea fx:id="textArea" layoutX="200.0" layoutY="79.0" prefHeight="880.0" prefWidth="1000.0" text="Welcome to the Rimworld XML Def tool. Click on the menu options above for various input methods" wrapText="true" AnchorPane.bottomAnchor="41.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="79.0" />
+      <TextArea fx:id="textArea" layoutX="200.0" layoutY="79.0" prefHeight="880.0" prefWidth="1000.0" text="Welcome to the Rimworld XML Def tool. Click on the menu options above for various input methods" AnchorPane.bottomAnchor="41.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="79.0" />
       <ToolBar layoutY="955.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="955.0">
         <items>
-            <Label fx:id="dialog" alignment="CENTER" prefHeight="17.0" prefWidth="159.0" text="dialog goes here" />
+            <Label fx:id="dialog" alignment="CENTER" prefHeight="17.0" prefWidth="332.0" text="dialog goes here" />
             <Button fx:id="buttonOne" mnemonicParsing="false" text="Button" />
         </items>
       </ToolBar>
