@@ -11,6 +11,8 @@ FEATURES:
 
 -Generate templates for: ThingsDefs (ThingDef_Item_Base, ThingDefs_Item_Generic, etc).
 
+-choose default or no values
+
 ---
 TO DO:
 
