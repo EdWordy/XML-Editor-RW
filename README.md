@@ -1,6 +1,6 @@
 # XML Editor RW
 ---
-Version 0.0.3
+Version 0.0.4
 
 An XML Generation tool for Rimworld 1.3 written in java 8 (jre 1.8)
  
