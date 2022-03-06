@@ -19,6 +19,11 @@ TO DO:
 -Mostly everything, this is version 0.0.1
 
 ---
+REQUIRES:
+
+Java 8 installed (check program files for Java/jre-1.8)
+
+---
 HOW TO USE:
 
 Download the latest release or download the jar from the out folder and run it using the java platform binary SE
