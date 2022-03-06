@@ -8,6 +8,7 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane prefHeight="1024.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="XMLEditorRWUIController">
@@ -20,17 +21,12 @@
                      <items>
                         <Menu mnemonicParsing="false" text="ThingDef...">
                            <items>
-                              <MenuItem fx:id="baseTemplateTD" mnemonicParsing="false" onAction="#generateThingDefBase" text="Base Template">
-                                 <graphic>
-                                    <ChoiceBox fx:id="cbTD" prefWidth="150.0" />
-                                 </graphic>
-                              </MenuItem>
-                            <MenuItem fx:id="ThingDefItem" mnemonicParsing="false" onAction="#generateThingDef_Item_Base" text="ThingDef_Item_Base">
+                            <MenuItem fx:id="ThingDefItem" mnemonicParsing="false" onAction="#generateThingDef_Items_Base" text="ThingDef_Item_Base">
                                  <graphic>
                                     <ChoiceBox fx:id="cbTDI" prefWidth="150.0" />
                                  </graphic>
                               </MenuItem>
-                              <MenuItem mnemonicParsing="false" onAction="#generateThingDef_Item_Generic" text="ThingDef_Item_Generic">
+                              <MenuItem mnemonicParsing="false" onAction="#generateThingDef_Items_Generic" text="ThingDef_Item_Generic">
                                  <graphic>
                                     <ChoiceBox fx:id="cbTDIG" prefWidth="150.0" />
                                  </graphic>
@@ -39,7 +35,6 @@
                         </Menu>
                      </items>
                   </Menu>
-              <MenuItem mnemonicParsing="false" onAction="#close" text="Close Program" />
             </items>
           </Menu>
             <Menu mnemonicParsing="false" text="Open">
@@ -61,13 +56,23 @@
       </MenuBar>
       <ToolBar layoutY="40.0" prefWidth="1024.0" AnchorPane.bottomAnchor="943.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
          <items>
-            <Button mnemonicParsing="false" onAction="#generateModTemplate" text="Generate Mod Template" />
+            <Label alignment="CENTER" prefHeight="17.0" prefWidth="49.0" text="Tools" />
+            <Button mnemonicParsing="false" onAction="#generateModTemplate" text="Generate Mod Template">
+               <tooltip>
+                  <Tooltip text="Generate a stock mod template in a chosen directory" />
+               </tooltip></Button>
          </items></ToolBar>
-      <TextArea fx:id="textArea" layoutX="200.0" layoutY="79.0" text="Welcome to the Rimworld XML Def tool. Click on the menu options above for various input methods" AnchorPane.bottomAnchor="41.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="79.0" />
+      <TextArea fx:id="textArea" layoutX="200.0" layoutY="79.0" prefHeight="720.0" prefWidth="1024.0" AnchorPane.bottomAnchor="41.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="79.0" />
       <ToolBar layoutY="983.0" prefHeight="41.0" prefWidth="1024.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="983.0">
         <items>
-            <Label fx:id="dialog" alignment="CENTER" prefHeight="17.0" prefWidth="332.0" text="dialog goes here" />
-            <Button fx:id="buttonOne" mnemonicParsing="false" onAction="#copyToClipboard" text="Copy to Clipboard" />
+            <Label fx:id="dialog" alignment="CENTER" prefHeight="17.0" prefWidth="332.0" text="dialog goes here" textFill="#8a8a8a">
+               <tooltip>
+                  <Tooltip text="Dialog when the program runs will display here" />
+               </tooltip></Label>
+            <Button fx:id="buttonOneB" mnemonicParsing="false" onAction="#copyToClipboard" text="Copy to Clipboard">
+               <tooltip>
+                  <Tooltip text="Copy current template to clipboard" />
+               </tooltip></Button>
         </items>
       </ToolBar>
    </children>

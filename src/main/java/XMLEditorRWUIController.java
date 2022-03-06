@@ -20,24 +20,23 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.*;
 import java.nio.file.Files;
-
 import javafx.scene.input.Clipboard;
 
 public class XMLEditorRWUIController extends Application {
 
     // program variables
 
-    // primtive variables
+    // primitive variables
 
     public String currentFileType;
 
     public File selectedDirectory;
 
-    public String ThingDef_Base  = "\\thingDef_Base.xml";
+    public String ThingDef_Item_Base  = "\\Items_Base.xml";
 
-    public String ThingDef_Item_Base  = "\\thingDef_Item_Base.xml";
+    public String ThingDef_Item_Generic  = "\\Items_Generic.xml";
 
-    public String ThingDef_Item_Generic  = "\\thingDef_Item_Generic.xml";
+    private String ThingDef_Buildings_Generic = "\\Buildings_Generic.xml";
 
     // fxml variables
 
@@ -60,9 +59,6 @@ public class XMLEditorRWUIController extends Application {
     public DirectoryChooser directoryChooserMT;
 
     @FXML
-    public ChoiceBox<String> cbTD;
-
-    @FXML
     public ChoiceBox<String> cbTDI;
 
     @FXML
@@ -80,11 +76,21 @@ public class XMLEditorRWUIController extends Application {
         System.out.println("----- BEGINNING TO INITIALIZE -----");
 
         // set up the choice boxes
-        cbTD.getItems().addAll("No Values", "Default Values");
         cbTDI.getItems().addAll("No Values", "Default Values");
         cbTDIG.getItems().addAll("No Values", "Default Values");
 
         System.out.println("Choice boxes initialized!");
+
+        // set up the greeting message
+        textArea.setText("Welcome to the Rimworld XML Def tool. Click on the menu options above for various input methods" + System.lineSeparator() + System.lineSeparator()
+                            + "[Input Methods]" + System.lineSeparator()
+                            + "New: Generate a new Def" + System.lineSeparator()
+                            + "Open: Open a previously made def" + System.lineSeparator() + System.lineSeparator()
+                            + "This program is primarily used for the generation of Def templates. I personally" + System.lineSeparator()
+                            + "detest writing xml from scratch and made this program to ease that task." + System.lineSeparator() + System.lineSeparator()
+                            + "NOTE: Please save or copy the current working template before generating a new one as generation will clear the text area."
+                            + System.lineSeparator());
+        System.out.println("Greeting message initialized!");
 
         // footer message
         System.out.println("----- END INITIALIZE -----");
@@ -100,13 +106,13 @@ public class XMLEditorRWUIController extends Application {
 
         // creates the root, sets it equal to the .fxml file and then sets the stage
         Parent root = FXMLLoader.load(getClass().getResource("XMLEditorRWUI.fxml"));
-        primaryStage.setTitle("XML Editor RW v0.0.3");
+        primaryStage.setTitle("XML Editor RW v0.0.4");
         primaryStage.setScene(new Scene(root, 1024, 1024));
         primaryStage.setResizable(true);
         primaryStage.show();
     }
 
-    // top menu stuff
+    // top menu 1 stuff
 
     public void save(ActionEvent actionEvent) throws IOException {
 
@@ -145,15 +151,10 @@ public class XMLEditorRWUIController extends Application {
 
         // creates a new alert popup box when the about button is clicked
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("XML Editor RW v0.0.3 help");
+        alert.setTitle("XML Editor RW v0.0.4 help");
         alert.setHeaderText(null);
-        alert.setContentText("XML Editor RW v0.0.3 was written in java 8 for Rimworld 1.3");
+        alert.setContentText("XML Editor RW v0.0.4 was written in java 8 for Rimworld 1.3");
         alert.showAndWait();
-    }
-
-    public void close(ActionEvent actionEvent) {
-
-        System.exit(0);
     }
 
     public void openFile() throws IOException {
@@ -235,7 +236,7 @@ public class XMLEditorRWUIController extends Application {
 
     }
 
-    // bottom menu bar
+    // bottom menu 1 bar
 
     public void copyToClipboard(ActionEvent actionEvent) {
 
@@ -374,61 +375,7 @@ public class XMLEditorRWUIController extends Application {
 
     // generation method for thingDefs
 
-    public void generateThingDefBase(ActionEvent actionEvent) throws ParserConfigurationException, TransformerException {
-
-        // messages
-        dialog.setText("Generating ThingDef (base)...");
-
-        // set currentFileType
-        currentFileType = ThingDef_Base;
-
-        // instantiate the document builder, the factory and document
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder dBuilder = factory.newDocumentBuilder();
-        Document doc = dBuilder.newDocument();
-
-        // create the root element node
-        Element defs = doc.createElement("Defs");
-        doc.appendChild(defs);
-
-        // create the textures element
-        Element thingDef = doc.createElement("ThingDef");
-        defs.appendChild(thingDef);
-
-        // TODO finish this section of elements
-
-
-
-
-        if (cbTD.getSelectionModel().isSelected(0)) {
-
-            // messages
-            System.out.println("No values selected");
-
-        } else if (cbTD.getSelectionModel().isSelected(1)){
-
-            // messages
-            System.out.println("Default values selected");
-
-            // TODO finish this section of setters
-
-
-
-        }
-
-        // transform the document
-        // and output to a string writer
-        StringWriter sw = transform(doc);
-
-        // set to text area
-        textArea.clear();
-        textArea.setText(String.valueOf(sw));
-
-        // messages
-        dialog.setText("ThingDef (base) generated");
-    }
-
-    public void generateThingDef_Item_Base(ActionEvent actionEvent) throws ParserConfigurationException, TransformerException {
+    public void generateThingDef_Items_Base(ActionEvent actionEvent) throws ParserConfigurationException, TransformerException {
 
         // messages
         dialog.setText("Generating ThingDef_Item_Base (generic)...");
@@ -453,16 +400,6 @@ public class XMLEditorRWUIController extends Application {
         thingDef.setAttribute("Abstract", " ");
         thingDef.setAttribute("Name", " ");
         thingDef.setAttribute("ParentName", " ");
-
-        // create the thingClass element
-        Element thingClass = doc.createElement("thingClass");
-        thingDef.appendChild(thingClass);
-        thingClass.setTextContent(" ");
-
-        // create the thingClass element
-        Element stackCount = doc.createElement("stackCount");
-        thingDef.appendChild(stackCount);
-        stackCount.setTextContent(" ");
 
         // TODO finish resource base item set up
 
@@ -506,7 +443,7 @@ public class XMLEditorRWUIController extends Application {
         dialog.setText("ThingDef_Item_Base generated");
     }
 
-    public void generateThingDef_Item_Generic(ActionEvent actionEvent) throws ParserConfigurationException, TransformerException {
+    public void generateThingDef_Items_Generic(ActionEvent actionEvent) throws ParserConfigurationException, TransformerException {
 
         // messages
         dialog.setText("Generating ThingDef_Item_Generic...");
@@ -610,7 +547,7 @@ public class XMLEditorRWUIController extends Application {
             texPath.setTextContent("Things/Item");
 
             // set the li1 element
-            li1.setTextContent("Item");
+            li1.setTextContent("Items");
 
             //
 
@@ -631,6 +568,56 @@ public class XMLEditorRWUIController extends Application {
 
         // messages
         dialog.setText("thingDef_Item_Generic generated");
+    }
+
+    public void generateThingDef_Buildings_Generic() throws ParserConfigurationException, TransformerException {
+
+        // messages
+        dialog.setText("Generating ThingDef_Buildings_Generic...");
+
+        // set currentFileType
+        currentFileType = ThingDef_Buildings_Generic;
+
+        // instantiate the document builder, the factory and document
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder dBuilder = factory.newDocumentBuilder();
+        Document doc = dBuilder.newDocument();
+
+        // createElements and setAttributes here
+
+        // create the Defs element
+        Element defs = doc.createElement("Defs");
+        doc.appendChild(defs);
+
+        //
+        //
+        //
+
+        // remember to change choice box
+        if (cbTDIG.getSelectionModel().isSelected(0)) {
+
+            // messages
+            System.out.println("No values selected");
+
+        } else if (cbTDIG.getSelectionModel().isSelected(1)) {
+
+            // messages
+            System.out.println("Default values selected");
+
+            // set default values here with setters
+
+        }
+
+        // transform the document
+        // and output to a string writer
+        StringWriter sw = transform(doc);
+
+        // set to text area
+        textArea.clear();
+        textArea.setText(String.valueOf(sw));
+
+        // messages
+        dialog.setText("ThingDef_Buildings_Generic generated");
     }
 
     // TODO more templates
