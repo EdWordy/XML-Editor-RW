@@ -26,6 +26,8 @@ Java 8 installed (check program files for Java/jre-1.8)
 ---
 HOW TO USE:
 
+Download Java 8 and run the installer if you don't have it
+
 Download the latest release or download the jar from the out folder and run it using the java platform binary SE
 
 ---
