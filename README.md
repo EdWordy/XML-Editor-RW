@@ -7,11 +7,17 @@ An XML Generation tool for Rimworld 1.3 written in java 8 (jre 1.8)
 ---
 FEATURES:
 
--An XML template generator
+An XML template generator
 
 -Generate templates for: ThingsDefs (ThingDef_Item_Base, ThingDefs_Item_Generic, etc).
 
 -choose default or no values
+
+-Copy to clipboard button
+
+-Save file with pre-generated name in chosen directory
+
+-Generate a template mod folder in a chosen directory
 
 ---
 TO DO:
